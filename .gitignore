@@ -1,0 +1,39 @@
+# Object files
+*.o
+
+# Executables
+*.out
+*.exe
+*.elf
+
+# Static and shared libraries
+*.a
+*.so
+*.so.*
+
+# Build directories
+/build/
+/bin/
+/lib/
+/dist/
+
+# Test binaries
+/tests/bin/
+
+# Editor & OS files
+*~
+*.swp
+.DS_Store
+
+# Logs and core dumps
+*.log
+core
+
+# Generated files
+*.d
+*.gcda
+*.gcno
+*.gcov
+
+# Make-specific
+Makefile.in
