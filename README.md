@@ -1,5 +1,7 @@
 # BTCMarkets Market Data API C Library
 
+**contact: agentsoftraderesearch@gmail.com**
+
 ## 📦 Project Structure
 ```bash
 .
