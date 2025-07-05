@@ -13,55 +13,67 @@ int main() {
         return 1;
     }
 
-    GetMarketCandlesQueryParams candle_params = {
+    char *list_active_markets_response = list_active_markets();
+    if (list_active_markets_response) {
+        printf("List Active Markets Response:\n%s\n", list_active_markets_response);
+        free(list_active_markets_response);
+    }
+
+    char *get_market_ticker_response = get_market_ticker("BTC-AUD");
+    if (get_market_ticker_response) {
+        printf("Get Market Ticker Response:\n%s\n", get_market_ticker_response);
+        free(get_market_ticker_response);
+    }
+
+    GetMarketTradesQueryParams get_market_trades_params = { 
+        .before = 78234976,
+        .limit = 3 
+        };
+    char *get_market_trades_response = get_market_trades("BTC-AUD", &get_market_trades_params);
+    if (get_market_trades_response) {
+        printf("Get Market Trades Response:\n%s\n", get_market_trades_response);
+        free(get_market_trades_response);
+    }
+
+    GetMarketOrderbookQueryParams get_market_orderbook_params = { .level = 0 };
+    char *get_market_orderbook_response = get_market_orderbook("BTC-AUD", &get_market_orderbook_params);
+    if (get_market_orderbook_response) {
+        printf("Get Market Orderbook Response:\n%s\n", get_market_orderbook_response);
+        free(get_market_orderbook_response);
+    }
+
+    GetMarketCandlesQueryParams get_market_candles_params = {
         .time_window="1w",
         .from="2025-05-01T00:00:00.000000Z",
         .to="2025-05-05T00:00:00.000000Z",
         .limit=1
     };
-    char *candle_response = get_market_candles("BTC-AUD", &candle_params);
-    if (candle_response) {
-        free(candle_response);
+    char *get_market_candles_response = get_market_candles("BTC-AUD", &get_market_candles_params);
+    if (get_market_candles_response) {
+        printf("Get Market Candles Response:\n%s\n", get_market_candles_response);
+        free(get_market_candles_response);
     }
 
     char *multiple_tickers_ids[3] = {"BTC-AUD", "XRP-AUD", "ETH-AUD"};
-    GetMultipleTickersQueryParams multiple_tickers_params = {
+    GetMultipleTickersQueryParams get_multiple_tickers_params = {
         .market_ids = multiple_tickers_ids,
         .num_market_ids = 3
         };
-    char *multiple_tickers_response = get_multiple_tickers(&multiple_tickers_params);
-    if (multiple_tickers_response) {
-        free(multiple_tickers_response);
+    char *get_multiple_tickers_response = get_multiple_tickers(&get_multiple_tickers_params);
+    if (get_multiple_tickers_response) {
+        printf("Get Multiple Tickers Response:\n%s\n", get_multiple_tickers_response);
+        free(get_multiple_tickers_response);
     }
 
     char *multiple_orderbooks_ids[3] = {"BTC-AUD", "XRP-AUD", "ETH-AUD"};
-    GetMultipleOrderbooksQueryParams multiple_orderbooks_params = {
+    GetMultipleOrderbooksQueryParams get_multiple_orderbooks_params = {
         .market_ids = multiple_orderbooks_ids,
         .num_market_ids = 3
         };
-    char *multiple_orderbooks_response = get_multiple_orderbooks(&multiple_orderbooks_params);
-    if (multiple_orderbooks_response) {
-        free(multiple_orderbooks_response);
-    }
-
-    char *ticker_response = get_market_ticker("BTC-AUD");
-    if (ticker_response) {
-        free(ticker_response);
-    }
-
-    GetMarketTradesQueryParams trade_query_params = { 
-        .before = 78234976,
-        .limit = 3 
-        };
-    char *trade_response = get_market_trades("BTC-AUD", &trade_query_params);
-    if (trade_response) {
-        free(trade_response);
-    }
-
-    GetMarketOrderbookQueryParams orderbook_params = { .level = 0 };
-    char *orderbook_response = get_market_orderbook("BTC-AUD", &orderbook_params);
-    if (orderbook_response) {
-        free(orderbook_response);
+    char *get_multiple_orderbooks_response = get_multiple_orderbooks(&get_multiple_orderbooks_params);
+    if (get_multiple_orderbooks_response) {
+        printf("Get Multiple Orderbooks Response:\n%s\n", get_multiple_orderbooks_response);
+        free(get_multiple_orderbooks_response);
     }
 
     cleanup_api_context();

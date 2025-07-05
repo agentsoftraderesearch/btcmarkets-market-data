@@ -10,10 +10,8 @@ char* list_active_markets_v3() {
     char endpoint[30];
     snprintf(endpoint, sizeof(endpoint), "markets");
     char *response = api_get(&api, endpoint);
-    if (response) {
-        printf("V3 List Active Markets Response (%s):\n%s\n", endpoint, response);
-    } else {
-        fprintf(stderr, "V3 List Active Markets request failed (%s):\n", endpoint);
+    if (!response) {
+        fprintf(stderr, "V3 List Active Markets request failed (%s)\n", endpoint);
         return NULL;
     }
     return response;
@@ -23,10 +21,9 @@ char* get_market_ticker_v3(char *market_id) {
     char endpoint[30];
     snprintf(endpoint, sizeof(endpoint), "markets/%s/ticker", market_id);
     char *response = api_get(&api, endpoint);
-    if (response) {
-        printf("V3 Get Market Ticker Response (%s):\n%s\n", endpoint, response);
-    } else {
-        fprintf(stderr, "V3 Get Market Ticker request failed (%s):\n", endpoint);
+    if (!response) {
+        fprintf(stderr, "V3 Get Market Ticker request failed (%s)\n", endpoint);
+        return NULL;
     }
     return response;
 }
@@ -55,10 +52,9 @@ char* get_market_trades_v3(char *market_id, GetMarketTradesQueryParams *query_pa
     }
 
     char *response = api_get(&api, endpoint);
-    if (response) {
-        printf("V3 Get Market Trades Response (%s):\n%s\n", endpoint, response);
-    } else {
-        fprintf(stderr, "V3 Get Market Trades request failed (%s).\n", endpoint);
+    if (!response) {
+        fprintf(stderr, "V3 Get Market Trades request failed (%s)\n", endpoint);
+        return NULL;
     }
     return response;
 }
@@ -67,10 +63,9 @@ char* get_market_orderbook_v3(char *market_id, GetMarketOrderbookQueryParams *qu
     char endpoint[128];
     snprintf(endpoint, sizeof(endpoint), "markets/%s/orderbook?level=%d", market_id, query_params->level);
     char *response = api_get(&api, endpoint);
-    if (response) {
-        printf("V3 Get Market Orderbook Response (%s):\n%s\n", endpoint, response);
-    } else {
-        fprintf(stderr, "V3 Get Market Orderbook request failed ( %s ).\n", endpoint);
+    if (!response) {
+        fprintf(stderr, "V3 Get Market Orderbook request failed (%s)\n", endpoint);
+        return NULL;
     }
     return response;
 }
@@ -116,10 +111,9 @@ char* get_market_candles_v3(char *market_id, GetMarketCandlesQueryParams *query_
     }
 
     char *response = api_get(&api, endpoint);
-    if (response) {
-        printf("V3 Get Market Candles Response (%s):\n%s\n", endpoint, response);
-    } else {
-        fprintf(stderr, "V3 Get Market Candles request failed ( %s ).\n", endpoint);
+    if (!response) {
+        fprintf(stderr, "V3 Get Market Candles request failed (%s)\n", endpoint);
+        return NULL;
     }
     return response;
 }
@@ -142,12 +136,10 @@ char* get_multiple_tickers_v3(GetMultipleTickersQueryParams *query_params) {
     }
 
     char *response = api_get(&api, endpoint);
-    if (response) {
-        printf("V3 Get Multiple Tickers Response (%s):\n%s\n", endpoint, response);
-    } else {
-        fprintf(stderr, "V3 Get Multiple Tickers request failed (%s).\n", endpoint);
+    if (!response) {
+        fprintf(stderr, "V3 Get Multiple Tickers request failed (%s)\n", endpoint);
+        return NULL;
     }
-
     return response;
 }
 
@@ -169,10 +161,9 @@ char* get_multiple_orderbooks_v3(GetMultipleOrderbooksQueryParams *query_params)
     }
 
     char *response = api_get(&api, endpoint);
-    if (response) {
-        printf("V3 Get Multiple Orderbooks Response (%s):\n%s\n", endpoint, response);
-    } else {
-        fprintf(stderr, "V3 Get Multiple Orderbooks request failed ( %s ).\n", endpoint);
+    if (!response) {
+        fprintf(stderr, "V3 Get Multiple Orderbooks request failed (%s)\n", endpoint);
+        return NULL;
     }
     return response;
 }

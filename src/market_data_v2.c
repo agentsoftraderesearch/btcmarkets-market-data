@@ -14,6 +14,7 @@ char* list_active_markets_v2() {
         printf("V2 List Active Markets Response:\n%s\n", resp);
     } else {
         fprintf(stderr, "V2 List Active Markets request failed.\n");
+        return NULL;
     }
     return resp;
 }
@@ -27,6 +28,7 @@ char* get_market_ticker_v2(char *market_id) {
         printf("V2 Ticker Response:\n%s\n", resp);
     } else {
         fprintf(stderr, "V2 Ticker request failed.\n");
+        return NULL;
     }
     return resp;
 }
